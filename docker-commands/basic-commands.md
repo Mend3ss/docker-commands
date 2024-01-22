@@ -47,13 +47,13 @@ docker run <imagem>
 ```
 docker container ls
 ```
-### ou
+### Ou
 
 ```
 docker ps
 ```
 
-## docker container ls -a / docker ps -a
+## Docker container ls -a / Docker ps -a
 
 ### comando para listar todos os container, mesmo os encerrados.
 
@@ -61,7 +61,7 @@ docker ps
 docker container ls -a
 ```
 
-### ou
+### Ou
 
 ```
 docker ps -a
