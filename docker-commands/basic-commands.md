@@ -10,7 +10,7 @@ docker pull <imagem>
 
 ## Docker Images
 
-### Comando usado para listar imagens baixadas no host
+### Comando usado para listar imagens baixadas no host.
 
 ```
 docker images
@@ -18,7 +18,7 @@ docker images
 
 ## Docker Images ls
 
-### Comando para visualizar imagens baixadas no sistema
+### Comando para visualizar imagens baixadas no sistema.
 
 ```
 docker images ls
@@ -26,7 +26,7 @@ docker images ls
 
 ## Docker rmi
 
-### Comando usado para remover uma imagem baixada
+### Comando usado para remover uma imagem baixada.
 
 ```
 docker rmi <imagem>
@@ -34,15 +34,21 @@ docker rmi <imagem>
 
 ## Docker run
 
-### Comando usado para subir container
+### Comando usado para subir container.
 
 ```
 docker run <imagem>
 ```
 
+### Podemos deixar um processo rodando para que o container não seja encerrado após o run.. Use os parâmetros "-di":
+
+```
+docker run -id <imagem-a-ser-usada>
+```
+
 ## Docker container ls / Docker ps
 
-### Comando usado para listar containers ativos (também mostra o nome, ID, COMMAND entre outras informações)
+### Comando usado para listar containers ativos (também mostra o nome, ID, COMMAND entre outras informações).
 
 ```
 docker container ls
@@ -55,7 +61,7 @@ docker ps
 
 ## Docker container ls -a / Docker ps -a
 
-### comando para listar todos os container, mesmo os encerrados.
+### Comando para listar todos os container, mesmo os encerrados.
 
 ```
 docker container ls -a
@@ -69,8 +75,82 @@ docker ps -a
 
 ## Docker rm
 
-### comando para excluir containers
+### Comando para excluir containers.
 
 ```
 docker rm <id do container>
+```
+
+## Docker stop
+
+### Comando que encerra containers.
+
+```
+docker stop <id do container>
+```
+
+## Docker start
+
+### Comando para iniciar um container encerrado.
+
+```
+docker start <id do container>
+```
+
+## Docker pause
+
+### Comando que deixa o container parado, mas sem encerra-lo.
+
+```
+docker pause <id do container>
+```
+
+## Docker unpause
+
+### Comando que "despausa" um container.
+
+```
+docker unpause <id do container>
+```
+
+## Docker exec
+
+### Comando para executar comandos em um container.
+
+```
+docker exec <id do container> <comando>
+```
+### Exemplo (executando terminal bash em um container ubuntu):
+
+```
+docker exec -it <id do container> bash
+```
+
+<br>
+<br>
+
+# Mapeando portas
+
+## Docker -p
+
+### Com o comando "docker -p (minúsculo)" podemos especificar uma porta que queremos abrir do nosso host e qual porta do container irá receber o tráfego.
+
+```
+docker run -p porta-do-host-a-ser-aberta:porta-do-container-a-ser-exposta <imagem>
+```
+
+## Docker -P
+
+### Com o P (maiúsculo) temos um efeito semelhante, porém ele escolhe as portas do host de forma aleatória.
+
+```
+docker run -d -P <imagem>
+```
+
+## Docker port
+
+### Comando usado para verificar as portas em uso do container.
+
+```
+docker port <id do container>
 ```
