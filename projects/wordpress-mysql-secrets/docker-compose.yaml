@@ -1,0 +1,70 @@
+#Doc
+## https://docs.docker.com/compose/
+
+
+#Devemos comecar definindo a versao do compose
+
+version: '3.4'
+
+
+
+#Agora devemos definir os "services" do nosso compose
+  ##Um service são as imagens que queremos usar, bem como suas dependencias
+
+services:
+  #Nome para o nosso service
+  wordpress:
+    
+    ##Agora podemos passar as suas dependencias e outras confiuracoes (volumes, portas, rede,etc.)
+    image: wordpress:latest
+    ports: 
+      - 80:80
+      
+# A rede deve estar definida no compose e deve estar no mesmo nivel do "services e version"
+    networks: 
+      - rede-docker 
+  
+# Tambem podemos passar as variaveis de ambiente, caso tenha:
+#!! Variaveis como senhas, devem ser passadas via secrets: https://docs.docker.com/compose/use-secrets/
+  
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_NAME: mysql-wordpress
+      WORDPRESS_DB_USER: ./secrets/db-user.txt
+      WORDPRESS_DB_PASSWORD: ./secrets/db-password.txt
+    secrets:
+      - db-user
+      - db-password
+
+    
+#Criando Database
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3386:3386
+    networks:
+      - rede-docker
+    environment:
+      MYSQL_ROOT_PASSWORD: ./secrets/db-root-password.txt
+      MYSQL_USER: ./secrets/db-user.txt
+      MYSQL_PASSWORD: ./secrets/db-password.txt
+      MYSQL_DATABASE: mysql-wordpress
+    secrets:
+      - db-root-password
+      - db-user
+      - db-password
+
+
+
+secrets:
+  db-root-password:
+    file: ./secrets/db-roote-password.txt
+  db-user:
+    file: ./secrets/db-user.txt
+  db-password:
+    file: ./secrets/db-password.txt 
+
+networks:
+  rede-docker:
+    driver: bridge
