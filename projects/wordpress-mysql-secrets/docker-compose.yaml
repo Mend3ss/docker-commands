@@ -59,7 +59,7 @@ services:
 
 secrets:
   db-root-password:
-    file: ./secrets/db-roote-password.txt
+    file: ./secrets/db-root-password.txt
   db-user:
     file: ./secrets/db-user.txt
   db-password:
